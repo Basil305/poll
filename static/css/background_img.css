@@ -1,4 +1,10 @@
 body{
-    background-image: url('../img/bgrnd.jpg');
+    background-image: url('../img/bgreg.jpg');
     background-size: cover;
 }
+.list-group-item {
+    background-color: transparent;
+    border-top: 1px solid #ddd;
+    border-radius: 0;
+    color: #fff;
+    }

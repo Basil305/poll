@@ -192,11 +192,14 @@ def poll_vote(request, poll_id):
         vote = Vote(user=request.user, poll=poll, choice=choice)
         vote.save()
         print(vote)
-        return render(request, 'poll/poll_result.html', {'poll': poll})
+        return redirect("poll:list")
+
+        # return render(request, 'poll/poll_result.html', {'poll': poll})
     else:
         messages.error(
             request, "No choice selected", extra_tags='alert alert-warning alert-dismissible fade show')
         return redirect("poll:detail", poll_id)
+    
     return render(request, 'poll/poll_result.html', {'poll': poll})
 
 @login_required
@@ -211,4 +214,21 @@ def endpoll(request, poll_id):
         return render(request, 'poll/poll_result.html', {'poll': poll})
     else:
         return render(request, 'poll/poll_result.html', {'poll': poll})
+
+
+
+@login_required
+def poll_result(request):
+    polls = Poll.objects.all()
+    context = {
+        "polls":polls
+    }
+    return render(request,"poll/lists.html",context)
+
+@login_required
+def poll_results_show(request,id):
+    poll = get_object_or_404(Poll, pk=id)
+
+    return render(request, 'poll/poll_result.html', {'poll': poll})
+
 

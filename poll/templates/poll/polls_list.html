@@ -28,8 +28,11 @@
                 role="button"><i class="far fa-clock"></i> Date</a>
             <a class="btn btn-{% if 'vote' in request.GET %}warning{% else %}primary{% endif %} mb-3" href="?vote=True"
                 role="button"><i class="fas fa-poll"></i> Vote</a>
-
+            <!-- {% if user.is_superuser %}
+            <a class="btn btn-{% if 'poll_result' in request.GET %}warning{% else %}primary{% endif %} mb-3" href="{% url 'poll:poll_result' %}"
+                role="button"><i class="fas fa-poll"></i> Result</a>
             <a class="btn btn-primary mb-3 float-right" href="{% url 'poll:add' %}" role="button">Add <i class="fas fa-plus"></i></a>
+            {% endif %} -->
 
             <form class="form-inline">
                 <div class="form-group mr-sm-2 mb-2">
@@ -41,7 +44,7 @@
 
             <ul class="list-group">
                 {% for poll in polls %}
-                <li class="list-group-item"><a href="{% url 'poll:detail' poll.id %}">{{ poll.text|truncatewords:5 }}
+                <li class="list-group-item" ><a href="{% url 'poll:detail' poll.id %}">{{ poll.text|truncatewords:5 }}
                         {% if not poll.active%}
                         <i class="fas fa-check-circle ml-2"></i>
                         {% endif %}
